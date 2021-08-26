@@ -1,18 +1,37 @@
 import React from "react";
+import "./styles.css";
 
-const App = () => {
-  const onClickButton = () => alert();
-  const contentStyle = {
-    color: "blue",
-    fontSize: "36px"
-  };
+export const App = () => {
   return (
     <>
-      <h1 style={contentStyle}>Hello World</h1>
-      <p>How are you?</p>
-      <button onClick={onClickButton}>Button</button>
+      <div className="input-area">
+        <input placeholder="Enter the todo" />
+        <button>Add</button>
+      </div>
+      <div className="uncompleted-area">
+        <p className="title">Uncompleted Todo</p>
+        <ul>
+          <div className="list-row">
+            <li>Something</li>
+            <button>Complete</button>
+            <button>Delete</button>
+          </div>
+          <div className="list-row">
+            <li>Something</li>
+            <button>Complete</button>
+            <button>Delete</button>
+          </div>
+        </ul>
+      </div>
+      <div className="complete-area">
+        <p className="title">Completed Todo</p>
+        <ul>
+          <div className="list-row">
+            <li>Something</li>
+            <button>Back</button>
+          </div>
+        </ul>
+      </div>
     </>
   );
 };
-
-export default App;
