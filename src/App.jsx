@@ -3,11 +3,8 @@ import "./styles.css";
 
 export const App = () => {
   const [todoText, setTodotext] = useState("");
-  const [uncompletedTodos, setUncompletedTodos] = useState([
-    "Something1",
-    "Something2"
-  ]);
-  const [completedTodos, setCompletedTodos] = useState(["Something3"]);
+  const [uncompletedTodos, setUncompletedTodos] = useState([]);
+  const [completedTodos, setCompletedTodos] = useState([]);
 
   const onChangeTodoText = (event) => setTodotext(event.target.value);
 
@@ -29,6 +26,15 @@ export const App = () => {
     newUncompletedTodos.splice(index, 1);
 
     const newCompleteTodos = [...completedTodos, uncompletedTodos[index]];
+    setUncompletedTodos(newUncompletedTodos);
+    setCompletedTodos(newCompleteTodos);
+  };
+
+  const onClickBack = (index) => {
+    const newCompleteTodos = [...completedTodos];
+    newCompleteTodos.splice(index, 1);
+
+    const newUncompletedTodos = [...uncompletedTodos, completedTodos[index]];
     setUncompletedTodos(newUncompletedTodos);
     setCompletedTodos(newCompleteTodos);
   };
@@ -64,7 +70,7 @@ export const App = () => {
             return (
               <div key={todo} className="list-row">
                 <li>{todo}</li>
-                <button>Back</button>
+                <button onClick={() => onClickBack(index)}>Back</button>
               </div>
             );
           })}
