@@ -24,6 +24,15 @@ export const App = () => {
     setUncompletedTodos(newTodos);
   };
 
+  const onClickComplete = (index) => {
+    const newUncompletedTodos = [...uncompletedTodos];
+    newUncompletedTodos.splice(index, 1);
+
+    const newCompleteTodos = [...completedTodos, uncompletedTodos[index]];
+    setUncompletedTodos(newUncompletedTodos);
+    setCompletedTodos(newCompleteTodos);
+  };
+
   return (
     <>
       <div className="input-area">
@@ -41,7 +50,7 @@ export const App = () => {
             return (
               <div key={todo} className="list-row">
                 <li>{todo}</li>
-                <button>Add</button>
+                <button onClick={() => onClickComplete(index)}>Complete</button>
                 <button onClick={() => onClickDelete(index)}>Delete</button>
               </div>
             );
@@ -51,7 +60,7 @@ export const App = () => {
       <div className="complete-area">
         <p className="title">Completed Todo</p>
         <ul>
-          {completedTodos.map((todo) => {
+          {completedTodos.map((todo, index) => {
             return (
               <div key={todo} className="list-row">
                 <li>{todo}</li>
