@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "./styles.css";
+import { InputTodo } from "./components/InputTodo";
+import { UncompleteTodos } from "./components/UncompleteTodos";
+import { CompletedTodos } from "./components/CompletedTodos";
 
 export const App = () => {
   const [todoText, setTodotext] = useState("");
@@ -41,41 +44,17 @@ export const App = () => {
 
   return (
     <>
-      <div className="input-area">
-        <input
-          placeholder="Enter the todo"
-          value={todoText}
-          onChange={onChangeTodoText}
-        />
-        <button onClick={onClickAdd}>Add</button>
-      </div>
-      <div className="uncompleted-area">
-        <p className="title">Uncompleted Todo</p>
-        <ul>
-          {uncompletedTodos.map((todo, index) => {
-            return (
-              <div key={todo} className="list-row">
-                <li>{todo}</li>
-                <button onClick={() => onClickComplete(index)}>Complete</button>
-                <button onClick={() => onClickDelete(index)}>Delete</button>
-              </div>
-            );
-          })}
-        </ul>
-      </div>
-      <div className="complete-area">
-        <p className="title">Completed Todo</p>
-        <ul>
-          {completedTodos.map((todo, index) => {
-            return (
-              <div key={todo} className="list-row">
-                <li>{todo}</li>
-                <button onClick={() => onClickBack(index)}>Back</button>
-              </div>
-            );
-          })}
-        </ul>
-      </div>
+      <InputTodo
+        todoText={todoText}
+        onChange={onChangeTodoText}
+        onClick={onClickAdd}
+      />
+      <UncompleteTodos
+        todos={uncompletedTodos}
+        onClickComplete={onClickComplete}
+        onClickDelete={onClickDelete}
+      />
+      <CompletedTodos todos={completedTodos} onClickBack={onClickBack} />
     </>
   );
 };
