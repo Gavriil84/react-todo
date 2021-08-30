@@ -48,7 +48,13 @@ export const App = () => {
         todoText={todoText}
         onChange={onChangeTodoText}
         onClick={onClickAdd}
+        disabled={uncompletedTodos.length >= 5}
       />
+      {uncompletedTodos.length >= 5 && (
+        <p style={{ color: "red" }}>
+          Complete the current Todos to add more in the list!
+        </p>
+      )}
       <UncompleteTodos
         todos={uncompletedTodos}
         onClickComplete={onClickComplete}
